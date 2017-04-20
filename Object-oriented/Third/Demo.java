@@ -176,10 +176,10 @@ class LeaseException extends RuntimeException {
 //			}
 //		}
 //	}
-public class S2220151693 implements ICalculateRent{ //类名需修改为S+学号形式
+public class Demo implements ICalculateRent{ //类名需修改为S+学号形式
 
 	public static void main(String[] args){
-		S2220151693 t=new S2220151693();
+		Demo t=new Demo();
 		MovieLease mv=new MovieLease();
 		mv.setMovieType("国产片");
 		mv.setAmount(2);
