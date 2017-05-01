@@ -1,0 +1,9 @@
+Good测试：
+4：
+	老师 	sum= 52.0	memberType= 0	deposit= 80.0	total= 52.0
+	我的 	sum= 54.0	memberType= 0	deposit= 160.0	total= 54.0
+	原因：老师要求的是电视剧新片每集都要加20附加押金，老师好像忘算了。
+5:
+	老师		sum= 14.0	memberType= 0	deposit= 80.0	total= 214.0
+	我的		sum= 14.4	memberType= 1	deposit= 80.0	total= 214.4
+	原因：老师对于会员类型没有输入，所以无法检验。

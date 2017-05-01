@@ -1,0 +1,188 @@
+电影国别：欧美片、国产片、日韩片、其他外国片
+电影类型：动作科幻、言情喜剧、动漫少儿、综艺音乐
+其他分类：连续剧/电影、新片/非新片
+计费规则：
+基本租金：7天以内每天每部收费2元，超过7天每天每部收费4元
+新片2天以内归还的不收附加费，超过2天的部分加收应收费额50%的附加费
+电视连续剧每3集视为1部，不足3集的也视为1部。动画片每1集视为1部
+所有外国新片每部加收1元版权费（不论天数）
+最终费用计算结果需“抹零”，即最终收费额向下取整到元
+押金计算：
+押金每部20元，连续剧1集按1部计算押金
+新片每部加收20元押金
+押金和收费分别计算，互不影响。
+会员管理：
+凡在店消费一次的顾客均可登记成为会员，需登记手机号和姓名。顾客累计消费满100元成为白银会员，每次消费总额打九折。在店累计消费达到800元或一次性预付1000元（预付款相当于消费，一旦使用概不退还）的客户可升级为黄金会员，每次消费总额打七折
+
+*** 请注意截止时间！！！***
+
+/////////////////////// 使用到的类源代码 //////////////////////////////////////
+/***
+ * 计费接口
+ */
+public interface ICalculateRentAndDeposit{
+	public Result calculate(List<MovieLease> leaseList, Member member);	//测试运行的计费方法
+}
+
+public class Result {
+
+	private int sum; //本次应缴费总额
+	private Member memberInfo; //根据收费情况修改后的会员信息
+
+	
+	
+	public Member getMemberInfo() {
+		return memberInfo;
+	}
+	public void setMemberInfo(Member memberInfo) {
+		this.memberInfo = memberInfo;
+	}
+	public int getSum() {
+		return sum;
+	}
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj==null || !(obj instanceof Result)){
+			return false;
+		}
+		
+		Result ro=(Result)obj;
+		if(this.memberInfo!=null && this.sum==ro.sum && this.memberInfo.equals(ro.memberInfo)){
+			return true;
+		}
+		return false;
+	}
+}
+
+/***
+ * 会员类
+ */
+public class Member{
+	private String memberName="tester"; 		//无用
+	private String mobile="13911111111";		//无用
+	private double deposit = 0;		//预存押金
+	private double total = 0;		//消费总额累积
+
+	public Member(){
+		
+	}
+
+	public Member(double deposit, double total){
+		this.deposit=deposit;
+		this.total=total;
+	}
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj==null || !(obj instanceof Member)){
+			return false;
+		}
+		Member m=(Member)obj;
+		if(this.deposit==m.deposit && this.total==m.total){
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public double getDeposit() {
+		return deposit;
+	}
+	public void setDeposit(double deposit) {
+		this.deposit = deposit;
+	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+}
+
+/***
+ * 租赁业务记录类
+ */
+public class MovieLease {
+	private String[] movieType=null;	//影片类型：详情参见题目
+	private int leaseDays=0;		//租期
+	private int amount=0;			//租赁集数
+		
+	public int getLeaseDays() {
+		return leaseDays;
+	}
+	public void setLeaseDays(int leaseDays) {
+		this.leaseDays = leaseDays;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public String[] getMovieType() {
+		return movieType;
+	}
+	public void setMovieType(String[] movieType) {
+		this.movieType = movieType;
+	}
+	
+}
+
+public class LeaseException extends RuntimeException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public LeaseException(){
+		
+	}
+
+	public LeaseException(String msg){
+		super(msg);
+	}
+	
+	public LeaseException(Exception e){
+		super(e);
+	}
+	
+}
+
+
+///////////////////////////////////以下为驱动类代码////////////////////////////
+
+public class Test implements ICalculateRentAndDeposit{ //类名需修改为S+学号形式
+
+	public static void main(String[] args){
+
+	}
+
+	@Override
+	public Result calculate(List<MovieLease> leaseList, Member member) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
+
+
+/////////////////////////// 测试代码见附件 /////////////////////////////
