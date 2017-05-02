@@ -3,19 +3,8 @@ package com.object.oriented;
 import java.util.LinkedList;
 import java.util.List;
 
-import finish.ChangeAmount;
-import finish.Check;
-import finish.Deposit;
-import finish.Fee;
-import finish.ICalculateRentAndDeposit;
-import finish.LeaseException;
-import finish.Member;
-import finish.MemberEffect;
-import finish.MovieLease;
-import finish.Result;
-
 /**
- * Ö÷Çı¶¯Àà
+ * ä¸»é©±åŠ¨ç±»
  */
 public class S2220151693 implements ICalculateRentAndDeposit {
 
@@ -24,34 +13,34 @@ public class S2220151693 implements ICalculateRentAndDeposit {
 	}
 	
 	/**
-	 * ½Ó¿ÚÊµÏÖ·½·¨
+	 * æ¥å£å®ç°æ–¹æ³•
 	 */
 	@Override
 	public Result calculate(List<MovieLease> leaseList, Member member) throws LeaseException {
-		//µ÷ÓÃÖ®Ç°¼ì²éÊäÈëÊÇ·ñÓĞÎó
+		//è°ƒç”¨ä¹‹å‰æ£€æŸ¥è¾“å…¥æ˜¯å¦æœ‰è¯¯
 		new Check().calculate(leaseList,member);
-		//´´½¨½ÓÊÕĞÅÏ¢¶ÔÏó
+		//åˆ›å»ºæ¥æ”¶ä¿¡æ¯å¯¹è±¡
 		Result re = new Result();
-		//×Ü·ÑÓÃ
+		//æ€»è´¹ç”¨
 		double sum = 0.0;
 		for(MovieLease tmp:leaseList)
 		{
-			//Ó°Æ¬×Ü·ÑÓÃÀÛ¼Æ£º¼Û¸ñ*²¿Êı
+			//å½±ç‰‡æ€»è´¹ç”¨ç´¯è®¡ï¼šä»·æ ¼*éƒ¨æ•°
 			sum += new Fee().calculate(tmp) * new ChangeAmount().calculate(tmp);
-			//Ñº½ğÀÛ¼Æ
+			//æŠ¼é‡‘ç´¯è®¡
 			member.setDeposit(member.getDeposit()+new Deposit().calculate(member, tmp));
 		}
-		//ÊäÈë×Ü·ÑÓÃ£º×Ü·ÑÓÃ*ÕÛ¿Û
+		//è¾“å…¥æ€»è´¹ç”¨ï¼šæ€»è´¹ç”¨*æŠ˜æ‰£
 		re.setSum((int)Math.floor(sum*new MemberEffect().count(member)));
-		//ÀÛ¼Æ»áÔ±Ïû·ÑĞÅÏ¢
+		//ç´¯è®¡ä¼šå‘˜æ¶ˆè´¹ä¿¡æ¯
 		member.setTotal(member.getTotal()+re.getSum());
-		//Êä³ö»áÔ±ĞÅÏ¢
+		//è¾“å‡ºä¼šå‘˜ä¿¡æ¯
 		re.setMemberInfo(member);
 		return re;
 	}
 }
 /**
- * ¼Æ·Ñ½Ó¿Ú
+ * è®¡è´¹æ¥å£
  */
 interface ICalculateRentAndDeposit
 {
